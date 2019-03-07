@@ -1,2 +1,2 @@
 # bip-api
-BIP Messager API Wrapper
+BIP Messanger API Wrapper

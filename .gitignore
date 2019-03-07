@@ -1,1 +1,4 @@
 .idea/
+dist/
+build/
+bip_api_semudu.egg-info/
