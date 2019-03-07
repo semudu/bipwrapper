@@ -1,27 +1,28 @@
 from enum import Enum
 import requests
+from requests.auth import HTTPBasicAuth
 import random
 
 
 class MessageType(Enum):
-    TEXT = 0
-    IMAGE = 2
-    AUDIO = 3
-    VIDEO = 4
-    STICKER = 5
-    CAPS = 6
-    LOCATION = 7
-    LINE = 9
-    CONTACT = 10
-    TEMPLATE = 13
-    DOCUMENT = 14
+    TEXT = "0"
+    IMAGE = "2"
+    AUDIO = "3"
+    VIDEO = "4"
+    STICKER = "5"
+    CAPS = "6"
+    LOCATION = "7"
+    LINE = "9"
+    CONTACT = "10"
+    TEMPLATE = "13"
+    DOCUMENT = "14"
 
 
 class BIP:
     def __init__(self, url, username, password):
         self.url = url
-        self.username = username
-        self.password = password
+        self.headers = {"Content-Type": "application/json"}
+        self.auth = HTTPBasicAuth(username, password)
 
     @staticmethod
     def __get_txnid__():
@@ -30,17 +31,16 @@ class BIP:
     @staticmethod
     def __get_receiver_json__(receiver):
         return {
-            "type": 2,
+            "type": "2",
             "address": receiver
         }
 
     def __send_message__(self, sender, post_json):
-        # TODO
-        pass
+        return requests.post(self.url, headers=self.headers, auth=self.auth, data=post_json)
 
     def __get_base_json__(self, receiver, message_type):
         return {
-            "txnid": self.__get_txnid__(),
+            "txnid": str(self.__get_txnid__()),
             "receiver": self.__get_receiver_json__(receiver),
             "composition": {
                 "list": [
@@ -68,50 +68,50 @@ class BIP:
     def send_image(self, sender, receiver, image_url, image_size, ratio):
         post_json = self.__get_post_json(receiver, MessageType.IMAGE, {
             "message": image_url,
-            "size": image_size,
-            "ratio": ratio
+            "size": str(image_size),
+            "ratio": str(ratio)
         })
         self.__send_message__(sender, post_json)
 
     def send_audio(self, sender, receiver, audio_url, audio_size):
         post_json = self.__get_post_json(receiver, MessageType.AUDIO, {
-            "message": audio_url,
-            "size": audio_size
+            "message": str(audio_url),
+            "size": str(audio_size)
         })
         self.__send_message__(sender, post_json)
 
     def send_video(self, sender, receiver, video_url, video_size, ratio):
         post_json = self.__get_post_json(receiver, MessageType.VIDEO, {
             "message": video_url,
-            "size": video_size,
-            "ratio": ratio
+            "size": str(video_size),
+            "ratio": str(ratio)
         })
         self.__send_message__(sender, post_json)
 
     def send_sticker(self, sender, receiver, sticker_url, item_id):
         post_json = self.__get_post_json(receiver, MessageType.STICKER, {
             "message": sticker_url,
-            "itemid": item_id
+            "itemid": str(item_id)
         })
         self.__send_message__(sender, post_json)
 
     def send_caps(self, sender, receiver, caps_url, item_id, size, ratio):
         post_json = self.__get_post_json(receiver, MessageType.CAPS, {
             "message": caps_url,
-            "itemid": item_id,
-            "ratio": ratio,
-            "size": size
+            "itemid": str(item_id),
+            "ratio": str(ratio),
+            "size": str(size)
         })
         self.__send_message__(sender, post_json)
 
     def send_location(self, sender, receiver, latitude, longitude, title, description, zoom_level):
         post_json = self.__get_post_json(receiver, MessageType.LOCATION, {
             "location": {
-                "lat": latitude,
-                "lon": longitude,
+                "lat": str(latitude),
+                "lon": str(longitude),
                 "title": title,
                 "desc": description,
-                "zoomlevel": zoom_level
+                "zoomlevel": str(zoom_level)
             }
         })
         self.__send_message__(sender, post_json)
