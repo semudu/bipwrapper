@@ -4,7 +4,7 @@ import requests
 import random
 
 
-class Wrapper:
+class BIP:
     def __init__(self, url, username, password):
         self.url = url
         self.headers = {"Content-Type": "application/json"}
@@ -41,56 +41,56 @@ class Wrapper:
         json_data = self.__get_base_json__(receiver, message_type)
         return {**json_data, **json}
 
-    def send_custom_message(self, sender, receiver, message_type, args_json):
+    def send_custom_message(self, receiver, message_type, args_json):
         post_json = self.__get_post_json(receiver, message_type, args_json)
-        self.__send_message__(sender, post_json)
+        self.__send_message__(post_json)
 
-    def send_text_message(self, sender, receiver, message):
+    def send_text_message(self, receiver, message):
         post_json = self.__get_post_json(receiver, MessageType.TEXT, {
             "message": message
         })
-        self.__send_message__(sender, post_json)
+        self.__send_message__(post_json)
 
-    def send_image(self, sender, receiver, image_url, image_size, ratio):
+    def send_image(self, receiver, image_url, image_size, ratio):
         post_json = self.__get_post_json(receiver, MessageType.IMAGE, {
             "message": image_url,
             "size": str(image_size),
             "ratio": str(ratio)
         })
-        self.__send_message__(sender, post_json)
+        self.__send_message__(post_json)
 
-    def send_audio(self, sender, receiver, audio_url, audio_size):
+    def send_audio(self, receiver, audio_url, audio_size):
         post_json = self.__get_post_json(receiver, MessageType.AUDIO, {
             "message": str(audio_url),
             "size": str(audio_size)
         })
-        self.__send_message__(sender, post_json)
+        self.__send_message__(post_json)
 
-    def send_video(self, sender, receiver, video_url, video_size, ratio):
+    def send_video(self, receiver, video_url, video_size, ratio):
         post_json = self.__get_post_json(receiver, MessageType.VIDEO, {
             "message": video_url,
             "size": str(video_size),
             "ratio": str(ratio)
         })
-        self.__send_message__(sender, post_json)
+        self.__send_message__(post_json)
 
-    def send_sticker(self, sender, receiver, sticker_url, item_id):
+    def send_sticker(self, receiver, sticker_url, item_id):
         post_json = self.__get_post_json(receiver, MessageType.STICKER, {
             "message": sticker_url,
             "itemid": str(item_id)
         })
-        self.__send_message__(sender, post_json)
+        self.__send_message__(post_json)
 
-    def send_caps(self, sender, receiver, caps_url, item_id, size, ratio):
+    def send_caps(self, receiver, caps_url, item_id, size, ratio):
         post_json = self.__get_post_json(receiver, MessageType.CAPS, {
             "message": caps_url,
             "itemid": str(item_id),
             "ratio": str(ratio),
             "size": str(size)
         })
-        self.__send_message__(sender, post_json)
+        self.__send_message__(post_json)
 
-    def send_location(self, sender, receiver, latitude, longitude, title, description, zoom_level):
+    def send_location(self, receiver, latitude, longitude, title, description, zoom_level):
         post_json = self.__get_post_json(receiver, MessageType.LOCATION, {
             "location": {
                 "lat": str(latitude),
@@ -100,11 +100,11 @@ class Wrapper:
                 "zoomlevel": str(zoom_level)
             }
         })
-        self.__send_message__(sender, post_json)
+        self.__send_message__(post_json)
 
-    def send_line(self, sender, receiver):
+    def send_line(self, receiver):
         post_json = self.__get_base_json__(receiver, MessageType.LINE)
-        self.__send_message__(sender, post_json)
+        self.__send_message__(post_json)
 
     # contact_json example
     #
@@ -119,14 +119,14 @@ class Wrapper:
     #         "country": "Türkiye"
     #     }]
     # }
-    def send_contact(self, sender, receiver, contact_json):
-        self.send_custom_message(sender, receiver, MessageType.CONTACT, contact_json)
+    def send_contact(self, receiver, contact_json):
+        self.send_custom_message(receiver, MessageType.CONTACT, contact_json)
 
-    def send_document(self, sender, receiver, filename, filepath):
+    def send_document(self, receiver, filename, filepath):
         post_json = self.__get_post_json(receiver, MessageType.DOCUMENT, {
             "document": {
                 "filename": filename,
                 "filepath": filepath
             }
         })
-        self.__send_message__(sender, post_json)
+        self.__send_message__(post_json)
