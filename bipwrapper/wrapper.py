@@ -4,7 +4,7 @@ import requests
 import random
 
 
-class BIP:
+class Wrapper:
     def __init__(self, url, username, password):
         self.url = url
         self.headers = {"Content-Type": "application/json"}

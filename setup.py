@@ -4,14 +4,14 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="bip-api",
+    name="bipwrapper",
     version="0.0.1",
     description="BIP Messenger API Wrapper",
     long_description=long_description,
     long_description_content_type="text/markdown",
     author="Serhat Durmaz",
     author_email="serhat.md@gmail.com",
-    url="https://github.com/semudu/bip-api",
+    url="https://github.com/semudu/bipwrapper",
     packages=setuptools.find_packages(),
     license="MIT",
     classifiers=[
