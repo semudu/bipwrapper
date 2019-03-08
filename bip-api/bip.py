@@ -1,4 +1,5 @@
 from requests.auth import HTTPBasicAuth
+from .type import MessageType
 import requests
 import random
 
@@ -20,7 +21,7 @@ class BIP:
             "address": receiver
         }
 
-    def __send_message__(self, sender, post_json):
+    def __send_message__(self, post_json):
         return requests.post(self.url, headers=self.headers, auth=self.auth, data=post_json)
 
     def __get_base_json__(self, receiver, message_type):
