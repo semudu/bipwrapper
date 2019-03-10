@@ -7,6 +7,12 @@ import logging
 logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
 
 
+class Api:
+    def __init__(self, url, username, password):
+        self.all = GroupApi(url, username, password)
+        self.one = MemberApi(url, username, password)
+
+
 class BaseApi:
     def __init__(self, url, username, password, address_type):
         self.url = url
@@ -192,8 +198,8 @@ class BaseApi:
 
 
 class GroupApi(BaseApi):
-    def __init__(self, config):
-        super().__init__(config["url"], config["username"], config["password"], AddressType.ALL_MEMBERS)
+    def __init__(self, url, username, password):
+        super().__init__(url, username, password, AddressType.ALL_MEMBERS)
 
     def send_quickreply_message(self, postback_id, buttons_tuple):
         super().send_quickreply_message(None, postback_id, buttons_tuple)
@@ -251,5 +257,5 @@ class GroupApi(BaseApi):
 
 
 class MemberApi(BaseApi):
-    def __init__(self, config):
-        super().__init__(config["url"], config["username"], config["password"], AddressType.MSISDN)
+    def __init__(self, url, username, password):
+        super().__init__(url, username, password, AddressType.MSISDN)
