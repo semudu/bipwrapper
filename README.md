@@ -1,2 +1,2 @@
-# bip-api
+# bipwrapper
 BIP Messenger API Wrapper
