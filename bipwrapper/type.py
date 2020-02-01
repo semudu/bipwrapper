@@ -42,6 +42,6 @@ class PollType(Enum):
     MULTIPLE_CHOOSE = 1
 
 
-class CType(Enum):
+class CType:
     BUZZ = "buzz"
     POLL = "poll"
