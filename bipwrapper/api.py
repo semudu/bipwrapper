@@ -10,7 +10,7 @@ logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
 class Api:
     def __init__(self, url, username, password):
         self.all = GroupApi(url, username, password)
-        self.one = MemberApi(url, username, password)
+        self.single = MemberApi(url, username, password)
 
 
 class BaseApi:
