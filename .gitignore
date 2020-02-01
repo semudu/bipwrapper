@@ -3,4 +3,3 @@ dist/
 build/
 bip_api_semudu.egg-info/
 test.py
-Pipfile.lock
