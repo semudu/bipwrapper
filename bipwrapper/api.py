@@ -6,19 +6,22 @@ import logging
 
 logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
 
+headers = {"Content-Type": "application/json"}
+
 
 class API:
-    def __init__(self, url, username, password):
-        self.all = GroupAPI(url, username, password)
-        self.single = SingleAPI(url, username, password)
+    def __init__(self, base_url, username, password):
+        auth = HTTPBasicAuth(username, password)
+        self.all = GroupAPI(base_url, auth)
+        self.single = SingleAPI(base_url, auth)
+        self.multi = MultiAPI(base_url, auth)
         # logging.debug("BIP initialized for,\nurl: %s\nusername: %s\npassword: %s" % (url, username, password))
 
 
 class BaseApi:
-    def __init__(self, url, username, password, address_type):
+    def __init__(self, url, auth, address_type):
         self.url = url
-        self.headers = {"Content-Type": "application/json"}
-        self.auth = HTTPBasicAuth(username, password)
+        self.auth = auth
         self.address_type = address_type
 
     @staticmethod
@@ -39,7 +42,7 @@ class BaseApi:
 
     def __send_message__(self, post_json):
         # logging.debug("Sending message -> %s" % post_json)
-        return requests.post(self.url, headers=self.headers, auth=self.auth, json=post_json)
+        return requests.post(self.url, headers=headers, auth=self.auth, json=post_json)
 
     def __get_base_json__(self, receiver):
         return {
@@ -199,8 +202,8 @@ class BaseApi:
 
 
 class GroupAPI(BaseApi):
-    def __init__(self, url, username, password):
-        super().__init__(url, username, password, AddressType.ALL_MEMBERS)
+    def __init__(self, base_url, auth):
+        super().__init__(base_url + "/sendmsgserv", auth, AddressType.ALL_MEMBERS)
 
     def send_quickreply_message(self, postback_id, buttons_tuple):
         super().send_quickreply_message(None, postback_id, buttons_tuple)
@@ -237,19 +240,6 @@ class GroupAPI(BaseApi):
     def send_line(self):
         super().send_line(None)
 
-    # contact_json example
-    #
-    # {
-    #     "name": "Cemal",
-    #     "surname": "Önder",
-    #     "phonenumbers": ["905332108323", "905XXXXXXXXX"],
-    #     "addresses": [{
-    #         "address": "Bahçelievler, Yenibosna, Atatürk Caddesi",
-    #         "postalcode": "34197",
-    #         "city": "İstanbul",
-    #         "country": "Türkiye"
-    #     }]
-    # }
     def send_contact(self, contact_json):
         super().send_contact(None, contact_json)
 
@@ -258,5 +248,77 @@ class GroupAPI(BaseApi):
 
 
 class SingleAPI(BaseApi):
-    def __init__(self, url, username, password):
-        super().__init__(url, username, password, AddressType.MSISDN)
+    def __init__(self, base_url, auth):
+        super().__init__(base_url + "/sendmsgserv", auth, AddressType.MSISDN)
+
+
+class MultiAPI(BaseApi):
+    def __init__(self, base_url, auth):
+        super().__init__(base_url + "/sendmsgservlist", auth, AddressType.MSISDN)
+
+    def __get_receiver_json__(self, receivers):
+        result = []
+        json_data = {
+            "type": self.address_type.value
+        }
+        for receiver in receivers:
+            if self.address_type == AddressType.MSISDN:
+                json_data["address"] = "90" + receiver[-10:]
+            elif self.address_type == AddressType.HASH:
+                json_data["address"] = receiver
+
+            result.append(json_data)
+
+        return result
+
+    def __get_base_json__(self, receivers):
+        return {
+            "txnid": str(self.__get_txnid__()),
+            "receivers": self.__get_receiver_json__(receivers),
+            "composition": {
+                "list": []
+            }
+        }
+
+    def send_quickreply_message(self, receivers: list, postback_id, buttons_tuple):
+        super().send_quickreply_message(receivers, postback_id, buttons_tuple)
+
+    def send_poll_message(self, receivers: list, poll_id, title, description, image_url, image_ratio, poll_type,
+                          options_tuple,
+                          button_name):
+        super().send_poll_message(receivers, poll_id, title, description, image_url, image_ratio, poll_type,
+                                  options_tuple,
+                                  button_name)
+
+    def send_custom_message(self, receivers: list, message_type, args_json):
+        super().send_custom_message(receivers, message_type, args_json)
+
+    def send_text_message(self, receivers: list, message):
+        super().send_text_message(receivers, message)
+
+    def send_image(self, receivers: list, image_url, image_size, ratio):
+        super().send_image(receivers, image_url, image_size, ratio)
+
+    def send_audio(self, receivers: list, audio_url, audio_size):
+        super().send_audio(receivers, audio_url, audio_size)
+
+    def send_video(self, receivers: list, video_url, video_size, ratio):
+        super().send_video(receivers, video_url, video_size, ratio)
+
+    def send_sticker(self, receivers: list, sticker_url, item_id):
+        super().send_sticker(receivers, sticker_url, item_id)
+
+    def send_caps(self, receivers: list, caps_url, item_id, size, ratio):
+        super().send_caps(receivers, caps_url, item_id, ratio)
+
+    def send_location(self, receivers: list, latitude, longitude, title, description, zoom_level):
+        super().send_location(receivers, latitude, longitude, title, description, zoom_level)
+
+    def send_line(self, receivers: list):
+        super().send_line(receivers)
+
+    def send_contact(self, receivers: list, contact_json):
+        super().send_contact(receivers, contact_json)
+
+    def send_document(self, receivers: list, filename, filepath):
+        super().send_document(receivers, filename, filepath)
