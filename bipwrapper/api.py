@@ -7,10 +7,11 @@ import logging
 logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
 
 
-class Api:
+class API:
     def __init__(self, url, username, password):
-        self.all = GroupApi(url, username, password)
-        self.single = MemberApi(url, username, password)
+        self.all = GroupAPI(url, username, password)
+        self.single = SingleAPI(url, username, password)
+        # logging.debug("BIP initialized for,\nurl: %s\nusername: %s\npassword: %s" % (url, username, password))
 
 
 class BaseApi:
@@ -19,7 +20,6 @@ class BaseApi:
         self.headers = {"Content-Type": "application/json"}
         self.auth = HTTPBasicAuth(username, password)
         self.address_type = address_type
-        logging.debug("BIP initialized for username: %s, password: %s" % (username, password))
 
     @staticmethod
     def __get_txnid__():
@@ -38,6 +38,7 @@ class BaseApi:
         return json_data
 
     def __send_message__(self, post_json):
+        # logging.debug("Sending message -> %s" % post_json)
         return requests.post(self.url, headers=self.headers, auth=self.auth, json=post_json)
 
     def __get_base_json__(self, receiver):
@@ -197,7 +198,7 @@ class BaseApi:
         self.__send_message__(post_json)
 
 
-class GroupApi(BaseApi):
+class GroupAPI(BaseApi):
     def __init__(self, url, username, password):
         super().__init__(url, username, password, AddressType.ALL_MEMBERS)
 
@@ -256,6 +257,6 @@ class GroupApi(BaseApi):
         super().send_document(None, filename, filepath)
 
 
-class MemberApi(BaseApi):
+class SingleAPI(BaseApi):
     def __init__(self, url, username, password):
         super().__init__(url, username, password, AddressType.MSISDN)
