@@ -45,3 +45,4 @@ class PollType(Enum):
 class CType:
     BUZZ = "buzz"
     POLL = "poll"
+    POSTBACK = "postback"

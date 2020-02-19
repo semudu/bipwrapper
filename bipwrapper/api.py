@@ -1,8 +1,10 @@
-from requests.auth import HTTPBasicAuth
-from .type import *
-import requests
-import random
 import logging
+import random
+
+import requests
+from requests.auth import HTTPBasicAuth
+
+from .type import *
 
 logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
 
@@ -258,10 +260,10 @@ class MultiAPI(BaseApi):
 
     def __get_receiver_json__(self, receivers):
         result = []
-        json_data = {
-            "type": self.address_type.value
-        }
         for receiver in receivers:
+            json_data = {
+                "type": self.address_type.value
+            }
             if self.address_type == AddressType.MSISDN:
                 json_data["address"] = "90" + receiver[-10:]
             elif self.address_type == AddressType.HASH:
