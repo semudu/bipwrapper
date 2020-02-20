@@ -1,5 +1,6 @@
 .idea/
+.vscode/
 dist/
 build/
-bip_api_semudu.egg-info/
+bipwrapper.egg-info/
 test.py
