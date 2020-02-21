@@ -1,23 +1,26 @@
-import pathlib
+import io
+import re
 
 from setuptools import setup
 
-HERE = pathlib.Path(__file__).parent
+with io.open("README.md", "rt", encoding="utf8") as f:
+    readme = f.read()
 
-README = (HERE / "README.md").read_text()
+with io.open("bipwrapper/__init__.py", "rt", encoding="utf8") as f:
+    version = re.search(r'__version__ = "(.*?)"', f.read()).group(1)
 
 setup(
     name="bipwrapper",
-    version="1.0.2",
+    version=version,
     description="BIP Messenger API Wrapper",
     license="MIT",
-    long_description=README,
+    long_description=readme,
     long_description_content_type="text/markdown",
     author="Serhat Durmaz",
     author_email="serhat.md@gmail.com",
     url="https://github.com/semudu/bipwrapper",
-    download_url="https://github.com/semudu/bipwrapper/archive/v1.0.1.tar.gz",
-    keywords=["BIP", "WRAPPER", "API"],
+    download_url="https://github.com/semudu/bipwrapper/archive/v" + version + ".tar.gz",
+    keywords=["BIP", "WRAPPER", "BIPMESSENGER", "BIPWRAPPER"],
     install_requires=["requests"],
     packages=["bipwrapper"],
     include_package_data=True,
