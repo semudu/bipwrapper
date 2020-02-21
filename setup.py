@@ -22,7 +22,7 @@ setup(
     download_url="https://github.com/semudu/bipwrapper/archive/v" + version + ".tar.gz",
     keywords=["BIP", "WRAPPER", "BIPMESSENGER", "BIPWRAPPER"],
     install_requires=["requests"],
-    packages=["bipwrapper"],
+    packages=["bipwrapper", "bipwrapper.model", "bipwrapper.service", "bipwrapper.type"],
     include_package_data=True,
     classifiers=[
         "Development Status :: 5 - Production/Stable",
