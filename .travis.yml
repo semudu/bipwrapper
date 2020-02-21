@@ -1,0 +1,12 @@
+language: python
+python:
+  - '2.7'
+  - '3.3'
+  - pypy
+deploy:
+  provider: pypi
+  username: '__token__'
+  password:
+    secure: wMVOIzGdw4nD+xqXzPMvvCOg65BXwaQudkSViBcUBdeXZSNRycxfHEAKo+QBquzlFUv0ZLUavqRlYjSeWCrm1csWhocbM7fkfN/csgZtUDw0gCk4xYVQxiqL3OMeOnewiX0OnnInAvLsaGr2Zieur2dHITotiF3ggp04fgehqtArGd8NITCG8KU5Os5CK7vxm0mUUTyh7bMILNCb23nzx7+9+cwBqSOQovP3wbRKIqVnEJf6gwmy366k0vEcE33kxrE+pDyqBPv7iU5gdLJTlk8po9gmcO0We+nBQmoOxTK9RgwzGWHUmu1hajCHZ7etBtfg9bTfWDgfSQEC4ZCB9UXKSAgVTfE0QA5uyTST9Bk5UurB2qiprGKxElVopYLl0itiDVpmYqvLbrR/BQkPcXchvGflQqCuZXG9Ls0aDTRUbeFMjhbzBcxNS4wS4R2kZ/zf17t0v/5VBhQHe7npnApB9pvlLICeKfAKGRKxZIFMrjZkX3rYzXNvqv9xG/G2ydGG50oqRdH6h3vfh5eFgiL9eh1gny8/FjAReKMWDsW/wBLRccB3YMW1lUfXq24bvc0Tx4EExnnbO5YTcpUx8NpdcVeQUnOshB3KnclMJMfEKr1MWCHV8cw3MIQXJeop9XK0h70OjKaILyj3OHj9rY6cMm/BbynvUpA5rudrIdU=
+  on:
+    branch: production
