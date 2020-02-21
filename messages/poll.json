@@ -1,0 +1,16 @@
+{
+  "sender": "905332108311",
+  "type": "M",
+  "msgid": 2762565,
+  "sendtime": "21.02.2020 11:32:03.008 +0300",
+  "txnid": "n9wIncIQ-25",
+  "avatarUrl": "http://prptims.turkcell.com.tr/scontent/avatar/p2p/751/4fb515bb03f4cf3d17b049ed40667973.jpg",
+  "nickname": "semudu",
+  "poll": {
+    "pollid": "__short_list",
+    "optionids": [
+      6
+    ]
+  },
+  "ctype": "Poll"
+}

@@ -1,0 +1,18 @@
+{
+  'sender': '905332108311',
+  'type': 'M',
+  'msgid': 2762571,
+  'sendtime': '21.02.2020 11:37:32.362 +0300',
+  'content': '(lat:40.509758, lon:27.497185)',
+  'txnid': 'n9wIncIQ-43',
+  'avatarUrl': 'http://prptims.turkcell.com.tr/scontent/avatar/p2p/751/4fb515bb03f4cf3d17b049ed40667973.jpg',
+  'nickname': 'semudu',
+  'location': {
+    'lat': 40.509758,
+    'lon': 27.497185,
+    'title': 'Avşa',
+    'desc': 'Avşa Adası',
+    'zoomlevel': null
+  },
+  'ctype': 'L'
+}

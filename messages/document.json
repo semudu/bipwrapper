@@ -1,0 +1,16 @@
+{
+  'sender': '905332108311',
+  'type': 'M',
+  'msgid': 2762570,
+  'sendtime': '21.02.2020 11:35:53.107 +0300',
+  'txnid': 'n9wIncIQ-37',
+  'avatarUrl': 'http://prptims.turkcell.com.tr/scontent/avatar/p2p/751/4fb515bb03f4cf3d17b049ed40667973.jpg',
+  'nickname': 'semudu',
+  'document': {
+    'filename': 'stack.yml',
+    'filepath': 'https://prpswf.tvoip.turkcell.com.tr/v1/AUTH_50f1066c3e9d4bcdbd2eb787f1c3287f/4423a7a590121cb3bedbd52cff4c67fa/baffc6379329fdd5f5a9fbde5e468a1a.rtf',
+    'extension': 'rtf',
+    'size': 810
+  },
+  'ctype': 'Document'
+}

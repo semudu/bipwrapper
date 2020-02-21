@@ -4,4 +4,4 @@ venv/
 dist/
 build/
 bipwrapper.egg-info/
-tests/test.py
+test.py

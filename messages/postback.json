@@ -1,0 +1,14 @@
+{
+  'sender': '905332108311',
+  'type': 'M',
+  'msgid': 2762567,
+  'sendtime': '21.02.2020 11:33:18.701 +0300',
+  'txnid': 'n9wIncIQ-29',
+  'avatarUrl': 'http://prptims.turkcell.com.tr/scontent/avatar/p2p/751/4fb515bb03f4cf3d17b049ed40667973.jpg',
+  'nickname': 'semudu',
+  'postback': {
+    'postbackid': '__menu',
+    'payload': '__point'
+  },
+  'ctype': 'Postback'
+}
