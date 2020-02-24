@@ -13,12 +13,12 @@ class Request:
         self.msgid = request["msgid"]
         self.sendtime = request["sendtime"]
         self.txnid = request["txnid"]
-        self.avatar_url = request["avatarUrl"]
+        self.avatar_url = request["avatarUrl"] if "avatarUrl" in request else None 
         self.nickname = request["nickname"]
         self.ctype = CType(request["ctype"])
 
         if self.ctype in (CType.TEXT, CType.CAPS, CType.STICKER, CType.PHOTO, CType.LOCATION):
-            self.context = request["content"]
+            self.content = request["content"]
 
         if self.ctype == CType.CONTACT:
             self.vcard = VCard(request["vcard"]["value"])
