@@ -14,7 +14,7 @@ class Request:
         self.sendtime = request["sendtime"]
         self.txnid = request["txnid"]
         self.avatar_url = request["avatarUrl"] if "avatarUrl" in request else None 
-        self.nickname = request["nickname"]
+        self.nickname = request["nickname"] if "nickname" in request else None
         self.ctype = CType(request["ctype"])
 
         if self.ctype in (CType.TEXT, CType.CAPS, CType.STICKER, CType.PHOTO, CType.LOCATION):
