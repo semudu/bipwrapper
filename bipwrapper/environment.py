@@ -3,8 +3,7 @@ class Base:
         self.single_url = base_url + "/sendmsgserv"
         self.multi_url = base_url + "/sendmsgservlist"
         self.multi_diff_url = base_url + "/sendmultiusermulticontent"
-        self.upload_url = "http://timsac.turkcell.com.tr/fts/rest/file/upload"
-
+        
 
 class Production(Base):
     def __init__(self):

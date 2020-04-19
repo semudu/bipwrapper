@@ -30,7 +30,7 @@ class Base:
         return json_data
 
     def __send_message__(self, post_json):
-        return requests.post(self.url, headers={"Content-Type": "application/json"}, auth=self.auth, json=post_json)
+        return requests.post(self.url,headers={"Content-Type": "application/json"}, auth=self.auth, json=post_json)
 
     def __get_base_json__(self, receiver):
         return {
