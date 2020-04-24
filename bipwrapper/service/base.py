@@ -79,6 +79,21 @@ class Base:
         })
         self.__send_message__(post_json)
 
+    def send_poll_message_without_image(self, receiver, poll_id, title, description, poll_type, options_tuple,
+                          button_name):
+        post_json = self.__get_post_json__(ContentType.MEDIA, receiver, {
+            "tmmtype": MediaType.POLL.value,
+            "polltmm": {
+                "title": title,
+                "description": description,
+                "polltype": poll_type.value,
+                "optionlist": self.__get_options_json__(options_tuple),
+                "pollid": poll_id,
+                "buttonname": button_name
+            }
+        })
+        self.__send_message__(post_json)
+
     def send_poll_message(self, receiver, poll_id, title, description, image_url, image_ratio, poll_type, options_tuple,
                           button_name):
         post_json = self.__get_post_json__(ContentType.MEDIA, receiver, {
