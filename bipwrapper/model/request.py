@@ -17,7 +17,7 @@ class Request:
         self.nickname = request["nickname"] if "nickname" in request else None
         self.ctype = CType(request["ctype"])
 
-        if self.ctype in (CType.TEXT, CType.CAPS, CType.STICKER, CType.PHOTO, CType.LOCATION):
+        if self.ctype in (CType.TEXT, CType.CAPS, CType.STICKER, CType.PHOTO, CType.VIDEO, CType.LOCATION):
             self.content = request["content"]
 
         if self.ctype == CType.CONTACT:

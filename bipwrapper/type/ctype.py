@@ -8,6 +8,7 @@ class CType(Enum):
     STICKER = "S"
     CAPS = "C"
     PHOTO = "I"
+    VIDEO = "V"
     TEXT = "T"
     LOCATION = "L"
     DOCUMENT = "Document"
