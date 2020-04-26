@@ -1,7 +1,7 @@
 from enum import Enum
 
 
-class ContentType(Enum):
+class ContentType(int, Enum):
     TEXT = 0
     IMAGE = 2
     AUDIO = 3

@@ -1,7 +1,7 @@
 from enum import Enum
 
 
-class MediaType(Enum):
+class MediaType(int, Enum):
     SINGLE = 0
     MULTIPLE = 1
     POLL = 2

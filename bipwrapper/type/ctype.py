@@ -1,7 +1,7 @@
 from enum import Enum
 
 
-class CType(Enum):
+class CType(str, Enum):
     BUZZ = "Buzz"
     POLL = "Poll"
     POSTBACK = "Postback"

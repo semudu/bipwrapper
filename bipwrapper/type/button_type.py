@@ -1,7 +1,7 @@
 from enum import Enum
 
 
-class ButtonType(Enum):
+class ButtonType(int, Enum):
     POST_BACK = 1
     VOICE_CALL = 2
     QR_CODE = 3
