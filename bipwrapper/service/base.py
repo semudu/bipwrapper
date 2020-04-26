@@ -30,7 +30,7 @@ class Base:
         return json_data
 
     def __send_message__(self, post_json):
-        return requests.post(self.url,headers={"Content-Type": "application/json"}, auth=self.auth, json=post_json)
+        return requests.post(self.url, headers={"Content-Type": "application/json"}, auth=self.auth, json=post_json)
 
     def __get_base_json__(self, receiver):
         return {
@@ -80,7 +80,7 @@ class Base:
         self.__send_message__(post_json)
 
     def send_poll_message_without_image(self, receiver, poll_id, title, description, poll_type, options_tuple,
-                          button_name):
+                                        button_name):
         post_json = self.__get_post_json__(ContentType.MEDIA, receiver, {
             "tmmtype": MediaType.POLL.value,
             "polltmm": {
@@ -148,7 +148,7 @@ class Base:
 
     def send_sticker(self, receiver, sticker_url, item_id):
         post_json = self.__get_post_json__(ContentType.STICKER, receiver, {
-            "message": sticker_url,
+            "message": "{\"url\":\"%s\"}" % sticker_url,
             "itemid": item_id
         })
         self.__send_message__(post_json)
@@ -156,8 +156,8 @@ class Base:
     def send_caps(self, receiver, caps_url, item_id, size, ratio):
         post_json = self.__get_post_json__(ContentType.CAPS, receiver, {
             "message": caps_url,
-            "itemid": item_id,
             "ratio": ratio,
+            "itemid": item_id,
             "size": size
         })
         self.__send_message__(post_json)
